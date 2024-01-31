@@ -1,5 +1,6 @@
 `docker-compose up dev mongodb mongo-express`
 
+docker-compose down dev
 docker-compose up dev
 docker-compose up -d dev
 

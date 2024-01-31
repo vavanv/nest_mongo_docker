@@ -7,7 +7,7 @@ services:
       context: .
       target: development
       dockerfile: ./Dockerfile
-    command: npm run start:debug
+    command: node dist/main
     ports:
       - 3000:3000
       - 9229:9229
@@ -19,10 +19,8 @@ services:
     restart: unless-stopped
     depends_on:
       - mongodb
-    environment:
-      #MONGO_URL: mongodb:27017
-      DATABASE_URL: mongodb://mongodb:27017/nest_db
-      #DATABASE_URL: mongodb://localhost:27047/nest_db
+    # environment:
+    #   DATABASE_URL: mongodb://mongodb:27017/nest_db
 
   mongodb:
     image: mongo:latest
@@ -34,17 +32,12 @@ services:
       - server-network
     ports:
       - 27047:27017
-    # volumes:
-    #   - dbdata6:/data/db
-    # healthcheck:
-    #   test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
+    volumes:
+      - dbdata:/data/db
     restart: unless-stopped
 
-# volumes:
-#   dbdata6:
+volumes:
+  dbdata:
 
 networks:
   server-network:
