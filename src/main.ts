@@ -8,8 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   //await app.listen(3000);
-  await app.listen(3000, () => {
-    console.log(`🚀 Application running at port 3000`);
+  await app.listen(process.env.APP_PORT, () => {
+    console.log(`🚀 Application running at port ${process.env.APP_PORT}`);
   });
 }
 bootstrap();
