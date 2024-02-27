@@ -10,13 +10,12 @@ services:
     command: node dist/main
     ports:
       - 3010:3000
-      - 9229:9229
     networks:
       - server-network
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    restart: unless-stopped
+    restart: always
     depends_on:
       - mongodb
     # environment:
@@ -34,7 +33,7 @@ services:
       - 27047:27017
     volumes:
       - dbdata:/data/db
-    restart: unless-stopped
+    restart: always
 
 volumes:
   dbdata:
